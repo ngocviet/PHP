@@ -1,0 +1,11 @@
+foreach($List_verhicle as $key => $sieuxe):
+                        ?>
+                        <tr>
+                            <td><?php echo $sieuxe->getName(); ?></td>
+                            <td><?php echo $sieuxe->getWheels(); ?></td>
+                            <td><?php echo $sieuxe->getdate(); ?></td>
+                            <td><?php echo $sieuxe->getWarranty(); ?></td>
+                            <td><?php echo $sieuxe->getType(); ?></td>
+                        </tr>
+                        <?php
+                    endforeach;
