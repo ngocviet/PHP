@@ -12,32 +12,48 @@
             float: left;
         }
         div{
-            margin: 0 20px 5px;
+            margin: 5px 310px 12px;
+        }
+        .div{
+            margin: 0;
+        }
+        .div0{
+            border: blue 5px solid;background-color: white;
+        }
+        /* form{
+            background-color: white;
+        } */
+        h2{
+            text-align: center;
         }
     </style>
 </head>
-<body>
-    <h2>Moi nhap thong tin</h2>
-    <form method="get" action="qlsvdemo.php">
-        <div><label>Username: </label><input type="text" placeholder="Enter your name" name="username" minlength="7" required/>
-        <?php 
-        if(!empty($_GET)){
-            if($_GET["error"] == "username"){
-                echo "<p style='color: red;'>Please enter your name</p>";
-            }
-        }
-        ?>
-        </div>
-        <div><label>Password: </label><input type="password" placeholder="Enter your pass" name="pass" minlength="7"/>
-        <?php 
-        if(!empty($_GET)){
-            if($_GET["error"] == "pass"){
-                echo "<p style='color: red;'>Please enter your age</p>";
-            }
-        }
-        ?>
-        </div>
-        <div><label style="color: white">v</label><input type="submit" value="Submit" />
-    </form>
+<body style="background-color: white;">
+    <h2>Mời bạn nhập thông tin</h2>
+    <div class="div0">
+        <form method="post" action="qlsv.php">
+            <div><label>Username: </label><input type="text" placeholder="Enter your name" name="username" minlength="7" required autocomplete="off"/>
+            </div>
+            <div><label>Password: </label><input type="password" placeholder="Enter your pass" name="pass" minlength="7" require pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*@#$%^&*){7}"/>
+            <?php
+                if(!empty($_GET)){
+                    if(isset($_GET['username_length'])){
+                        echo '<p style="color:red;">Username phải có ít nhất 7 ký tự</p>';
+                    }
+                    if(isset($_GET['pass_length'])){
+                        echo '<p style="color:red;">Password phải có ít nhất 7 ký tự</p>';
+                    }
+                    if(isset($_GET['pattern'])){
+                        echo '<p style="color:red;">Password yêu cầu bao gồm kí tự thuưường, hoa, số và đặc biệt</p>';
+                    }
+                    if(isset($_GET['loginfailed'])){
+                        echo '<p style="color:red;">Username va password khong khop</p>';
+                    }
+                }
+            ?>
+            </div>
+            <div><label style="color: white">v</label><input type="submit" value="Submit" /></div>
+        </form>
+    </div>
 </body>
 </html>
