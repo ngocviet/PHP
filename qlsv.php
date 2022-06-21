@@ -80,12 +80,51 @@
             </tbody>
     </table>
 </body>
-    <script>
+    <script> 
         function removeSV(id){
         if(confirm("Ban co chac chan muon xoa sinh vien nay khong?")){
             // window.location.href = "Editt.php?remove&id="+id;
             let ajax = new XMLHttpRequest();
-            ajax
+            ajax.open("GET", "removestdajax.php?id="+id,true);
+            ajax.send();
+            alert('hi');
+            ajax.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    var lst_sv = JSON.parse(this.responseText);
+                    the_tbody = document.querySelector("table tbody");
+                    the_tbody.innerHTML = "";
+                    lst_sv.forEach(element => {
+                        let the_tr = document.createElement("tr");
+                        let the_td_id = document.createElement("td");
+                        let the_td_name = document.createElement("td");
+                        let the_td_gender = document.createElement("td");
+                        let the_td_class = document.createElement("td");
+                        let the_td_subject = document.createElement("td");
+                        let the_td_dob = document.createElement("td");
+                        // let the_td_avatar = document.createElement("td");
+                        let the_td_update = document.createElement("td");
+                        the_td_id.innerText = element.ID;
+                        the_td_name.innerText = element.name;
+                        the_td_gender.innerText = element.gender;
+                        the_td_class.innerText = element.Lop;
+                        the_td_subject.innerText = element.subject;
+                        the_td_dob.innerText = element.dob;
+                        // the_td_avatar.innerText = 'avatar';
+                        the_td_update.innerHTML = '</a><button onclick="removeStd(' + element.id + ')">Xoa</button>';
+                        the_tr.appendChild(the_td_id);
+                        the_tr.appendChild(the_td_name);
+                        the_tr.appendChild(the_td_gender);
+                        the_tr.appendChild(the_td_class);
+                        the_tr.appendChild(the_td_subject);
+                        the_tr.appendChild(the_td_dob);
+                        // the_tr.appendChild(the_td_avatar);
+                        the_tr.appendChild(the_td_update);
+                        the_tbody.appendChild(the_tr);
+                    });
+                }else{
+                    alert('fail');
+                }
+            }
         }
     }
     </script>

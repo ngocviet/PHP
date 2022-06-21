@@ -1,14 +1,6 @@
 <?php
-class Student{
-    public $name;
-    public $age;
-    public function __construct($nameparam,$ageparam){
-        $this->name = $nameparam;
-        $this->age = $ageparam;
-    }
-    puclic function getName(){
-        return $this->name;
-    }
+$viet =1;
+if($viet==1){
+    $viet2=0;
 }
-$ongtoan = new Student('toan',20);
-echo $ongtoan;
+echo$viet2;
